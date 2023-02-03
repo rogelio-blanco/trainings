@@ -108,8 +108,32 @@ docker exec -ti kafka /opt/kafka/bin/kafka-topics.sh --list --zookeeper zookeepe
 ## Create a Topic
 docker exec -ti kafka /opt/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test2
 
+## List Topics
+docker exec -ti kafka /opt/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper:2181
 
 ## List Topics
 docker exec -ti kafka /opt/kafka/bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+
+```
+
+### Run Kafka Commands inside the container [Compatible with the yml file]
+```
+## List Brokers
+docker exec -ti <cont. id> broker-list
+
+## List Topics
+docker exec -ti <cont. id> kafka-topics --list --bootstrap-server localhost:9092
+
+## Create a Topic
+docker exec -ti <cont. id> kafka-topics --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test2
+
+## List Topics
+docker exec -ti <cont. id> kafka-topics --list --bootstrap-server localhost:9092
+
+## Produce Messages
+docker exec -ti <cont. id> kafka-console-producer --topic first-topic --bootstrap-server localhost:9092
+
+## Consume Messages
+docker exec -ti <cont. id> kafka-console-consumer --topic first-topic --bootstrap-server localhost:9092
 
 ```
